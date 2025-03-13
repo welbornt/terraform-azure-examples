@@ -1,0 +1,5 @@
+storage_account/terraform.tfvars
+storage_account/terraform.tfstate
+storage_account/terraform.tfstate.backup
+storage_account/.terraform.lock.hcl
+storage_account/.terraform
