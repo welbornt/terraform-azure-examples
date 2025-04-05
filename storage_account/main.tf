@@ -18,6 +18,11 @@ resource "azurerm_storage_account" "sa" {
   # TODO: add networking rules
 }
 
+output "storage_account_name" {
+  description = "The name of the deployed storage account"
+  value = azurerm_storage_account.sa.name
+}
+
 output "storage_account_file_endpoint" {
   description = "The endpoint for the deployed storage account"
   value       = azurerm_storage_account.sa.primary_file_endpoint
