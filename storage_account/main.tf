@@ -2,7 +2,7 @@
 
 resource "random_id" "random_storage_account_id" {
   prefix      = "azsa" # Azure Storage Account
-  byte_length = 12
+  byte_length = 4
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -14,7 +14,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_storage_account" "sa" {
-  name                     = random_id.random_storage_account_id.id
+  name                     = random_id.random_storage_account_id.dec
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account.account_tier
