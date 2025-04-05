@@ -5,6 +5,7 @@ resource "random_id" "random_storage_account_id" {
   byte_length = 4
 }
 
+# TODO: make the rg name random
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location
