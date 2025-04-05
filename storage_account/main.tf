@@ -1,5 +1,10 @@
 # Deploy the resources
 
+resource "random_id" "random_storage_account_id" {
+  prefix      = "azsa" # Azure Storage Account
+  byte_length = 12
+}
+
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location
@@ -20,7 +25,7 @@ resource "azurerm_storage_account" "sa" {
 
 output "storage_account_name" {
   description = "The name of the deployed storage account"
-  value = azurerm_storage_account.sa.name
+  value       = azurerm_storage_account.sa.name
 }
 
 output "storage_account_file_endpoint" {
