@@ -9,12 +9,6 @@ variable "location" {
   default     = "westus2"
 }
 
-variable "resource_group_name" {
-  description = "The name of the resource group to deploy"
-  type        = string
-  default     = "storageAccountRG"
-}
-
 variable "storage_account" {
   description = "Defines the storage account parameters"
   type = object({
