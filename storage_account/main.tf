@@ -1,13 +1,17 @@
 # Deploy the resources
 
+resource "random_id" "random_resource_group_id" {
+  prefix      = "azrg" # Azure Resource Group
+  byte_length = 4
+}
+
 resource "random_id" "random_storage_account_id" {
   prefix      = "azsa" # Azure Storage Account
   byte_length = 4
 }
 
-# TODO: make the rg name random
 resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
+  name     = random_id.random_resource_group_id.dec
   location = var.location
   tags = {
     deployed_on = timestamp()
