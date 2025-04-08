@@ -31,7 +31,7 @@ resource "azurerm_storage_account" "sa" {
   min_tls_version          = var.storage_account.min_tls_version
   network_rules {
     default_action = "Deny"
-    ip_rules = ["${chomp(data.http.my_public_ipv4.response_body)}"]
+    ip_rules       = ["${chomp(data.http.my_public_ipv4.response_body)}"]
   }
 }
 
