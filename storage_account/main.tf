@@ -10,6 +10,10 @@ resource "random_id" "random_storage_account_id" {
   byte_length = 4
 }
 
+data "http" "my_public_ipv4" {
+  url = "http://ipv4.icanhazip.com"
+}
+
 resource "azurerm_resource_group" "rg" {
   name     = random_id.random_resource_group_id.dec
   location = var.location
