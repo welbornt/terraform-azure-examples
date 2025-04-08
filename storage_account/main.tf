@@ -10,6 +10,10 @@ resource "random_id" "random_storage_account_id" {
   byte_length = 4
 }
 
+data "http" "my_public_ipv4" {
+  url = "http://ipv4.icanhazip.com"
+}
+
 resource "azurerm_resource_group" "rg" {
   name     = random_id.random_resource_group_id.dec
   location = var.location
@@ -25,7 +29,10 @@ resource "azurerm_storage_account" "sa" {
   account_tier             = var.storage_account.account_tier
   account_replication_type = var.storage_account.account_replication_type
   min_tls_version          = var.storage_account.min_tls_version
-  # TODO: add networking rules
+  network_rules {
+    default_action = "Deny"
+    ip_rules       = ["${chomp(data.http.my_public_ipv4.response_body)}"]
+  }
 }
 
 output "resource_group_name" {
