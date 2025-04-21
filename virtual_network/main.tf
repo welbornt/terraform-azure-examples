@@ -1,12 +1,27 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~>4.22"
+    }
+  }
+}
+
+provider "azurerm" {
+  subscription_id = var.subscription_id
+  features {}
+}
+
 
 resource "azurerm_resource_group" "rg" {
-  name     = "rg01"
+  name     = var.resource_group_name
   location = var.location
 }
 
-resource "azurerm_virtual_network" "vnet" {
-  name                = "vnet01"
-  address_space       = ["10.0.0.0/16"]
-  location            = var.location
+module "vnet" {
+  source              = "./module"
   resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  vnet                = var.vnet
+  subnets             = var.subnets
 }
